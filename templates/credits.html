@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Matching - Credits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Style for header and navbar */
+        /* Navigation bar styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #1a1a2e;
+            color: #fff;
+            z-index: 1000;
+            
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            
+            
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #21e6c1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px; /* Reduce gap between buttons */
+            margin-right: 40px; /* Add margin to pull buttons left */
+        }
+        
+        
+
+        .nav-buttons button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            color: #21e6c1;
+        }
+
+        /* Style for main content */
+        main {
+            padding-top: 180px;
+            padding: 130px 20px 40px; /* Extra padding on top to account for fixed header */
+            text-align: center;
+            color: #fff;
+            background-color: #1a1a2e;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #21e6c1;
+            margin-top: 50px; /* Space between the navigation bar and credits title */
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        /* Grid layout for team images */
+        .credits-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 20px ; /* Space between the credits text and team images */
+                margin-top: 20px; /* Adjust as needed for separation */
+            }
+            
+            
+
+        .credit-item {
+            text-align: center;
+            color: #ddd;
+            background-color: #282a36;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+            width: 180px;
+        }
+
+        .credit-item:hover {
+            transform: scale(1.05);
+        }
+
+        .credit-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .credit-item p {
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 10px;
+            color: #21e6c1;
+        }
+    </style>
+</head>
+<body>
+     <!-- Navigation Bar -->
+     <header class="navbar">
+        <div class="navbar-logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Website Logo">
+            <span class="navbar-title">Signature Matching</span>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/credits'">Credits</button>
+        </div>
+    </header>
+
+    <main>
+        <h2>Credits</h2>
+        
+        <p>This application was developed by our dedicated team.</p>
+        <div class="credits-container">
+            <div class="credit-item">
+                <img src="{{ url_for('static', filename='team1.jpg') }}" alt="Team Member 1">
+                <p>SAMARTH S V</p>
+            </div>
+            <div class="credit-item">
+                <img src="{{ url_for('static', filename='team2.jpg') }}" alt="Team Member 2">
+                <p>SATHVIK M V</p>
+            </div>
+            <div class="credit-item">
+                <img src="{{ url_for('static', filename='team3.jpg') }}" alt="Team Member 3">
+                <p>SOHAN K</p>
+            </div>
+            <div class="credit-item">
+                <img src="{{ url_for('static', filename='team4.jpg') }}" alt="Team Member 4">
+                <p>VANEESH S P</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

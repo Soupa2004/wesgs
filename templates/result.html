@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Result</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            padding-top: 70px; /* Space for fixed navbar */
+            text-align: center;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #1a1a2e;
+            color: #fff;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #21e6c1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-buttons button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            color: #21e6c1;
+        }
+
+        /* Result container styling */
+        .result-container {
+            display: inline-block;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .result-message {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: {{ color }};
+        }
+
+        .accuracy {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            background-color: #21e6c1;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #1abc9c;
+            color: #fff;
+        }
+
+        /* Keypoints image styling */
+        .keypoints-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .keypoints-container img {
+            max-width: 90%;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .keypoints-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="navbar-logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Website Logo">
+            <span class="navbar-title">Signature Matching</span>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/credits'">Credits</button>
+        </div>
+    </header>
+
+    <!-- Result Content -->
+    <main>
+        <div class="result-container">
+            <div class="result-message">{{ similarity }}</div>
+            <div class="accuracy">Similarity Score: {{ accuracy | round(2) }}%</div>
+            <a href="{{ url_for('index') }}" class="btn-back">Back to Home</a>
+        </div>
+
+        <!-- Keypoints Visualization -->
+        
+        
+    </main>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Matching Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Applications Section Styling */
+.applications-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    margin: 30px auto;
+    max-width: 1000px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    text-align: left;
+}
+
+.applications-container h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.applications-container p {
+    font-size: 1.1em;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.applications-container ul {
+    list-style-type: decimal;
+    padding-left: 20px;
+}
+
+.applications-container li {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.applications-container li strong {
+    color: #000;
+}
+
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #1a1a2e;
+            color: #fff;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #21e6c1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-buttons button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            color: #21e6c1;
+        }
+
+        /* Description text styling */
+        .description {
+            text-align: center;
+            padding: 20px 40px;
+            background-color: #1a1a2e;
+            color: #ddd;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-top: 70px; /* Space between navbar and description */
+        }
+
+        /* Upload container styling */
+        .upload-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 85vh; /* Larger height for the container */
+            background-color: #ffffff;
+            border-radius: 30px;
+            box-shadow: 0px 6px 24px rgba(0, 0, 0, 0.2);
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0px;
+            text-align: center;
+        }
+
+        .upload-container h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .upload-container label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .upload-container input[type="file"] {
+            margin-top: 10px;
+        }
+
+        .upload-container button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            background-color: #21e6c1;
+            color: #333;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-container button:hover {
+            background-color: #1abc9c;
+        }
+
+        /* Image preview styling */
+        .image-preview {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .image-preview img {
+            width: 400px;
+            height: 200px;
+            object-fit: cover;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Features section styling */
+        .features-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1000px;
+            padding: 20px;
+            margin: 30px auto;
+        }
+
+        /* Feature card styling */
+        .feature-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: #1abc9c;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="navbar-logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Website Logo">
+            <span class="navbar-title">Signature Matching</span>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/credits'">Credits</button>
+        </div>
+    </header>
+
+    <!-- Description Text -->
+    <div class="description">
+        <p>
+            A signature matching application is a software tool designed to authenticate, verify, or recognize handwritten or digital signatures by comparing them against a known reference. This application leverages pattern recognition, image processing, and machine learning algorithms to analyze various features in a signature, such as shape, stroke, pressure, and orientation.
+        </p>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Upload Container -->
+        <div class="upload-container">
+            <h2>Upload two signatures to compare their similarity</h2>
+            <form action="/compare" method="post" enctype="multipart/form-data">
+                <label for="file1">Upload First Signature</label>
+                <input type="file" id="file1" name="file1" accept="image/*" required onchange="previewImage(event, 'preview1')">
+                
+                <label for="file2">Upload Second Signature</label>
+                <input type="file" id="file2" name="file2" accept="image/*" required onchange="previewImage(event, 'preview2')">
+
+                <!-- Image previews -->
+                <div class="image-preview">
+                    <img id="preview1" src="#" alt="Preview of First Signature" style="display: none;">
+                    <img id="preview2" src="#" alt="Preview of Second Signature" style="display: none;">
+                </div>
+
+                <button type="submit">Compare Signatures</button>
+            </form>
+        </div>
+        <!-- Applications Section -->
+<div class="applications-container">
+    <h2>Applications of Signature Extraction and Matching</h2>
+    <p>
+        Signature matching ML models can be useful for various industries and businesses where signature verification is important. Some examples include:
+    </p>
+    <ul>
+        <li><strong>Banking and Financial Services:</strong> Banks and financial institutions can use signature matching ML models to verify signatures on checks, loan applications, and other financial documents.</li>
+        <li><strong>Government Agencies:</strong> Government agencies such as immigration, law enforcement, and security services can use signature matching ML models to authenticate identity documents, passports, and visas.</li>
+        <li><strong>Healthcare:</strong> Healthcare providers can use signature matching ML models to verify signatures on medical forms, prescriptions, and other documents.</li>
+        <li><strong>Insurance:</strong> Insurance companies can use signature matching ML models to verify signatures on claim forms, policy applications, and other documents.</li>
+        <li><strong>Legal Services:</strong> Law firms and legal services can use signature matching ML models to verify signatures on contracts, legal agreements, and other legal documents.</li>
+        <li><strong>Logistics and Transportation:</strong> Logistics and transportation companies can use signature matching ML models to verify signatures on shipping and delivery documents, reducing the risk of fraudulent activities.</li>
+        <li><strong>Retail and E-commerce:</strong> Retailers and e-commerce businesses can use signature matching ML models to verify signatures on delivery receipts and other important documents related to shipping and receiving products.</li>
+        <li><strong>Real Estate:</strong> Real estate agents and companies can use signature matching ML models to verify signatures on contracts and agreements related to buying and selling properties.</li>
+        <li><strong>Education:</strong> Educational institutions can use signature matching ML models to verify signatures on student forms, transcripts, and other important documents related to academic records.</li>
+        <li><strong>Human Resources:</strong> Human resources departments can use signature matching ML models to verify signatures on employee contracts, disciplinary forms, and other related documents.</li>
+    </ul>
+</div>
+
+
+        <!-- Features Section -->
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">✍️</div>
+                <div class="feature-title">Accuracy & Efficiency</div>
+                <p class="feature-description">
+                    Signature matching is a critical process in several industries. Our signature matching API is highly accurate and efficient, ensuring that your organization can quickly and easily verify the authenticity of signatures on important financial documents.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📜</div>
+                <div class="feature-title">Compliance</div>
+                <p class="feature-description">
+                    Our signature matching API is designed to help your organization comply with important regulations and industry standards, such as KYC and AML. By using our API, you can confidently verify the identity of individuals signing important documents.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <div class="feature-title">Integration</div>
+                <p class="feature-description">
+                    Our signature matching API is easy to integrate with your existing systems and workflows, making it a seamless addition to your organization’s operations. Whether you’re looking to integrate with a mobile app or back-end system, our team can help ensure smooth integration.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <div class="feature-title">Customization</div>
+                <p class="feature-description">
+                    We understand that every company is unique, which is why we offer a range of customization options for our signature matching API. From custom matching algorithms to configurable decision thresholds, we can tailor our solution to meet your specific needs.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript for Image Preview -->
+    <script>
+        function previewImage(event, previewId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(previewId);
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById(previewId).style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
